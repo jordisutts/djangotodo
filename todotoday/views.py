@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from.models import TodoItem
 from .forms import TodoItemForm
+
 
 # Create your views here.
 
@@ -22,9 +23,10 @@ def get_todo_page(request):
 def delete_todo_item(request, id):
     item = get_object_or_404(TodoItem, pk=id)
     item.delete()
-    return HttpResponse("You deleted " + item.name)
+    return redirect("/")
     
-def done_todo_item(request, id):
+def toggle_todo_item(request, id):
     item = get_object_or_404(TodoItem, pk=id)
-    item.done()
-    return HttpResponse("You completed " + item.name)
+    item.done = not item.done
+    item.save()
+    return redirect("/")
