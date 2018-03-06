@@ -16,10 +16,15 @@ def get_todo_page(request):
         
     form = TodoItemForm()
     items = TodoItem.objects.all()
-    return render(request, "todo/todo_items.html", {'items':items, 'form':form})  
+    return render(request, "todo/todo-list.html", {'items':items, 'form':form})  
     
     
 def delete_todo_item(request, id):
     item = get_object_or_404(TodoItem, pk=id)
     item.delete()
     return HttpResponse("You deleted " + item.name)
+    
+def done_todo_item(request, id):
+    item = get_object_or_404(TodoItem, pk=id)
+    item.done()
+    return HttpResponse("You completed " + item.name)

@@ -15,8 +15,8 @@
             {% if item.done %}
             <li><strike>{{ item.name }}</strike></li><form method="POST" action= "/delete/{{ item.id}}">{% csrf_token %}<input type="submit" value="Delete"/></form>
             {% else %}
-        
-        <li>{{ item.name }}</li>
+            
+        <li>{{ item.name }}</li><form method="POST" action= "/done/{{ item.id}}">{% csrf_token %}<input type="submit" value="done"/></form>
             
             {% endif %}
         {% endfor %}
