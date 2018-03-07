@@ -6,7 +6,7 @@ from .forms import TodoItemForm, EditTodoItemForm
 
 # Create your views here.
 
-def get_todo_page(request):
+def get_index(request):
     if request.method == "POST":
         form = TodoItemForm(request.POST)
         if form.is_valid():
